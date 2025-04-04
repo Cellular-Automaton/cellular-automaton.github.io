@@ -4,10 +4,11 @@
 
   let props = $props();
   let url = $state(page.url.pathname);
-  let compare = props.ref;
+  let compare = $state(props.ref);
 
   afterNavigate(() => {
     url = page.url.pathname;
+    compare = props.ref;
   });
 </script>
 

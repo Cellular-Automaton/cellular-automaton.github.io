@@ -17,7 +17,7 @@
   let props = $props();
   let params: string = $state(props.page.url.pathname.slice(3));
   let language: string = $state(page.params?.lang ?? 'en');
-  let lang: Languages;
+  let lang: Languages = $state(language as Languages);
 
   const updateParams = () => {
     params = page.url.pathname.slice(3);
@@ -49,12 +49,12 @@
     </button>
   </div>
   <div class="links-ul">
-    <UlRedirect size="larger" header ref={'/' + (page.params?.lang ?? 'en')}>{languages[(page.params?.lang ?? 'en') as Languages].home}</UlRedirect>
-    <UlRedirect size="larger" header ref={'/' + language + '/team'}>{languages[(page.params?.lang ?? 'en') as Languages].team}</UlRedirect>
+    <UlRedirect size="larger" header ref={'/' + language}>{languages[lang].home}</UlRedirect>
+    <UlRedirect size="larger" header ref={'/' + language + '/team'}>{languages[lang].team}</UlRedirect>
     <!-- NOTE: find a way to expand this outside of header ? -->
     <StickyDropdown title="Documentation">
       <UlDropdown header ref={'/' + language + '/documentation/overview'}>Overview</UlDropdown>
-      <UlDropdown header ref={'/' + language + '/documentation/get-started'}>Get started</UlDropdown>
+      <UlDropdown header ref={'/' + language + '/documentation/getting-started'}>Get started</UlDropdown>
       <UlDropdown header ref={'/' + language + '/documentation/api'}>Api documentation</UlDropdown>
     </StickyDropdown>
   </div>
@@ -65,9 +65,7 @@
     {#if language === 'fr'}
       <a href={'/en' + params}><img src={ukflag} alt="english flag" class="flag-icon" /></a>
     {/if}
-    <Button href={'/' + (page.params?.lang ?? 'en') + '/download'} size="sm" class="text-lg"
-      >{languages[(page.params?.lang ?? 'en') as Languages].download}</Button
-    >
+    <Button href={'/' + (page.params?.lang ?? 'en') + '/download'} size="sm" class="text-lg">{languages[lang].download}</Button>
   </div>
 </div>
 

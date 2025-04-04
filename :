@@ -10,7 +10,7 @@
   import { onMount } from 'svelte';
 
   let language: string = $state(page.params?.lang ?? 'en');
-  let lang: Languages = $state(language as Languages);
+  let lang: Languages;
 
   const updateParams = () => {
     language = page.params?.lang ?? 'en';
@@ -31,12 +31,18 @@
 
 <div class="sidebar">
   <li class="elements">
-    <UlRedirect ref={'/' + language + '/documentation/overview'}>{languages[lang].overview}</UlRedirect>
-    <TextDropdown title={languages[lang].get_started}>
-      <UlRedirect ref={'/' + language + '/documentation/getting-started'}>{languages[lang].installation}</UlRedirect>
+    <UlRedirect ref={(('/' + page.params?.lang) as Languages) + '/documentation/overview'}
+      >{languages[page.params?.lang as Languages].overview}</UlRedirect
+    >
+    <TextDropdown title={languages[page.params?.lang as Languages].get_started}>
+      <UlRedirect ref={(('/' + page.params?.lang) as Languages) + '/documentation/installation'}
+        >{languages[page.params?.lang as Languages].installation}</UlRedirect
+      >
     </TextDropdown>
-    <TextDropdown title={languages[lang].api}>
-      <UlRedirect ref={'/' + language + '/documentation/api'}>{languages[lang].overview}</UlRedirect>
+    <TextDropdown title={languages[page.params?.lang as Languages].api}>
+      <UlRedirect ref={(('/' + page.params?.lang) as Languages) + '/documentation/api'}
+        >{languages[page.params?.lang as Languages].overview}</UlRedirect
+      >
     </TextDropdown>
   </li>
 </div>
@@ -45,7 +51,7 @@
   .sidebar {
     background-color: var(--primary-900);
     opacity: 0.97;
-    min-width: 12.5vw;
+    min-width: 10vw;
     max-width: 15vw;
     min-height: 100vh;
     top: 10vh;

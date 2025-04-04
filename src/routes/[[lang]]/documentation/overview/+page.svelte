@@ -2,7 +2,6 @@
   import { page } from '$app/state';
   import { languages, isOfLangType } from '$lib/constants/languages/home';
   import type { Languages } from '$lib/constants/languages/home';
-  import Sidebar from '$lib/Sidebar.svelte';
   import { error } from '@sveltejs/kit';
 
   if (!isOfLangType(page.params?.lang as Languages)) {
@@ -14,7 +13,6 @@
   <title>CAMI - Documentation</title>
 </svelte:head>
 
-<Sidebar />
 <div class="box">
   <p>
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
